@@ -109,8 +109,7 @@ export function ContactForm() {
     if (typeof window === "undefined") return;
     try {
       audioRef.current ??= new (window.AudioContext ||
-        // @ts-expect-error vendor prefix
-        window.webkitAudioContext)();
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
       const ctx = audioRef.current;
       const o = ctx.createOscillator();
       const g = ctx.createGain();
